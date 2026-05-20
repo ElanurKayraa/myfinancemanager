@@ -1,13 +1,14 @@
 package de.htw_berlin.myfinancemanagerbackend;
-//Startseite der App
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication //kommmuniziert spring, dass hier die app startet
+@SpringBootApplication
+@ComponentScan(basePackages = "de.htw_berlin.myfinancemanagerbackend")
 public class MyfinancemanagerbackendApplication {
 
-	public static void main(String[] args) { //Einstiegspunkt der App, ab hier läuft es auf localhost
+	public static void main(String[] args) {
 		SpringApplication.run(MyfinancemanagerbackendApplication.class, args);
 	}
-
 }

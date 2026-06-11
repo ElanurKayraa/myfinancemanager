@@ -1,18 +1,26 @@
 package de.htw_berlin.myfinancemanagerbackend;
 
 import org.springframework.web.bind.annotation.*;
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
 @RequestMapping("/ausgaben")
+@CrossOrigin(origins = "*")
 public class AusgabeController {
+
+    private final AusgabeRepository repository;
+
+    public AusgabeController(AusgabeRepository repository) {
+        this.repository = repository;
+    }
 
     @GetMapping
     public List<Ausgabe> getAlle() {
-        return List.of(
-                new Ausgabe(1L, "Supermarkt", 42.50, "Lebensmittel", LocalDate.now()),
-                new Ausgabe(2L, "Netflix", 12.99, "Freizeit", LocalDate.now())
-        );
+        return repository.findAll();
+    }
+
+    @PostMapping
+    public Ausgabe erstellen(@RequestBody Ausgabe ausgabe) {
+        return repository.save(ausgabe);
     }
 }

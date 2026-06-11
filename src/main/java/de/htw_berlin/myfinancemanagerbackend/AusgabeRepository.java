@@ -1,4 +1,6 @@
 package de.htw_berlin.myfinancemanagerbackend;
 
-public class AusgabeRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AusgabeRepository extends JpaRepository<Ausgabe, Long> {
 }

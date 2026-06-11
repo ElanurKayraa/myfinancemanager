@@ -31,11 +31,8 @@ public class Ausgabe {
     public double getBetrag() { return betrag; }
     public String getKategorie() { return kategorie; }
     public LocalDate getDatum() { return datum; }
-
-    // Setters hinzufügen (am Ende der Klasse, vor der letzten })
     public void setTitel(String titel) { this.titel = titel; }
     public void setBetrag(double betrag) { this.betrag = betrag; }
     public void setKategorie(String kategorie) { this.kategorie = kategorie; }
     public void setDatum(LocalDate datum) { this.datum = datum; }
 }
-

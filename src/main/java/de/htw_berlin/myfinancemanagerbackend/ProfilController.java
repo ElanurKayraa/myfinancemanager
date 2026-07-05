@@ -13,9 +13,11 @@ import java.util.Map;
 public class ProfilController {
 
     private final ProfilRepository repository;
+    private final AusgabeRepository ausgabeRepository;
 
-    public ProfilController(ProfilRepository repository) {
+    public ProfilController(ProfilRepository repository, AusgabeRepository ausgabeRepository) {
         this.repository = repository;
+        this.ausgabeRepository = ausgabeRepository;
     }
 
     @GetMapping
@@ -45,5 +47,17 @@ public class ProfilController {
                     return ResponseEntity.ok(repository.save(profil));
                 })
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> loeschen(@PathVariable Long id) {
+        if (!repository.existsById(id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        // Zugehörige Ausgaben/Einnahmen mitlöschen, damit keine verwaisten Datensätze bleiben
+        List<Ausgabe> zugehoerige = ausgabeRepository.findByProfilId(id);
+        ausgabeRepository.deleteAll(zugehoerige);
+        repository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

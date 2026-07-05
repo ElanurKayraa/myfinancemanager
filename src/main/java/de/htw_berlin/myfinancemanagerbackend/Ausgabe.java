@@ -16,15 +16,19 @@ public class Ausgabe {
     private LocalDate datum;
     private Long profilId;
 
+    // "AUSGABE" oder "EINNAHME"
+    private String typ = "AUSGABE";
+
     public Ausgabe() {}
 
-    public Ausgabe(Long id, String titel, double betrag, String kategorie, LocalDate datum, Long profilId) {
+    public Ausgabe(Long id, String titel, double betrag, String kategorie, LocalDate datum, Long profilId, String typ) {
         this.id = id;
         this.titel = titel;
         this.betrag = betrag;
         this.kategorie = kategorie;
         this.datum = datum;
         this.profilId = profilId;
+        this.typ = typ;
     }
 
     // Getters
@@ -34,9 +38,11 @@ public class Ausgabe {
     public String getKategorie() { return kategorie; }
     public LocalDate getDatum() { return datum; }
     public Long getProfilId() { return profilId; }
+    public String getTyp() { return typ; }
     public void setTitel(String titel) { this.titel = titel; }
     public void setBetrag(double betrag) { this.betrag = betrag; }
     public void setKategorie(String kategorie) { this.kategorie = kategorie; }
     public void setDatum(LocalDate datum) { this.datum = datum; }
     public void setProfilId(Long profilId) { this.profilId = profilId; }
+    public void setTyp(String typ) { this.typ = typ; }
 }

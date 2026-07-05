@@ -32,4 +32,18 @@ public class ProfilController {
         Profil gespeichert = repository.save(profil);
         return ResponseEntity.status(HttpStatus.CREATED).body(gespeichert);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> umbenennen(@PathVariable Long id, @RequestBody Profil aktualisiert) {
+        return repository.findById(id)
+                .map(profil -> {
+                    if (aktualisiert.getName() == null || aktualisiert.getName().isBlank()) {
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                .body(Map.of("fehler", "Name darf nicht leer sein."));
+                    }
+                    profil.setName(aktualisiert.getName());
+                    return ResponseEntity.ok(repository.save(profil));
+                })
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
 }

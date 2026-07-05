@@ -45,6 +45,7 @@ public class AusgabeController {
         ausgabe.setBetrag(aktualisiert.getBetrag());
         ausgabe.setKategorie(aktualisiert.getKategorie());
         ausgabe.setDatum(aktualisiert.getDatum());
+        ausgabe.setTyp(aktualisiert.getTyp());
 
         return ResponseEntity.ok(repository.save(ausgabe));
     }
